@@ -1,0 +1,21 @@
+{
+    "name": "pptls",
+    "version": "1.0.0",
+    "description": "Rock, Paper, Scissors, Lizard, Spock",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Antonio",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.16.2",
+        "formidable": "^1.1.1",
+        "mongoose": "^5.0.6",
+        "socket.io": "^2.0.4"
+    },
+    "devDependencies": {
+        "nodemon": "^1.14.12"
+    }
+}

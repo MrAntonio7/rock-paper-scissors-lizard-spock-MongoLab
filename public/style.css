@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers');
+body {
+    width: 100%;
+    height: 100%;
+    background: #1680b1;
+    font-family: 'Bangers';
+}
+
+#form-nickname {
+    margin-top: 7em;
+}
+
+#opciones {
+    margin-top: 1em;
+    margin-bottom: 5%;
+}
+
+#opcion-img {
+    border-radius: 50px;
+}
+
+#game {
+    display: none;
+}
+
+.fondo-verde {
+    background: #28a745
+}
+
+.fondo-rojo {
+    background: #dc3545;
+}
+
+.zoom img {
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    vertical-align: middle;
+}
+
+.zoom img:hover {
+    transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    /* IE 9 */
+    -moz-transform: scale(1.5);
+    /* Firefox */
+    -webkit-transform: scale(1.5);
+    /* Safari and Chrome */
+    -o-transform: scale(1.5);
+    /* Opera */
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+#consola {
+    /* width: 50%; */
+    /* position: absolute;
+    bottom: 20px !important; */
+}
+
+#messages {
+    width: 95%;
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 20px #ccc inset;
+    border-radius: 10px;
+}
+
+#messagesglobal {
+    width: 95%;
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 20px #ccc inset;
+    border-radius: 10px;
+}
+
+.message {
+    margin: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    box-shadow: 5px 5px 10px #383838
+}
+
+#puntuaciones {
+    margin-top: 50px;
+}
+
+.fondo-azul {
+    background: #1680b1;
+}
+
+.card-sin-borde {
+    border: 0;
+}

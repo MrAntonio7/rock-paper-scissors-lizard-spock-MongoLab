@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>SheldonGame</title>
+</head>
+
+<body>
+
+
+    <div class="container" id="form-nickname">
+
+        <div class="row">
+            <div class="col-12 text-center text-light">
+                <h2>Nickname: </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mx-auto">
+                <form class="form-inline" onsubmit="return sendNick(this)" id="nick">
+                    <div class="col-10">
+                        <input class="form-control" id="nickname" type="text" placeholder="Nick">
+                    </div>
+                    <div class="col-2 p-0">
+                        <button class="btn btn-success ml-1" id="submit" type="submit">
+                         <i class="fa fa-paper-plane"></i>
+                    </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 text-center text-light">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Juego al mejor de 3
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 text-center text-light">
+                <h5>Últimas puntuaciones</h5>
+                <ol id="historial">
+                </ol>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container" id="game">
+        <div class="row" id="titulo">
+            <h3 class="text-light mx-auto mt-5">Piedra, Papel, Tijera, Lagarto, Spock</h3>
+        </div>
+        <div class="row" id="jugadores"></div>
+
+        <div id="sheldon" class="text-center">
+
+        </div>
+        <div id="puntuaciones" class="text-center">
+            <p class="text-white">Has ganado <span id="puntuacion"></span> partidas</p>
+        </div>
+
+        <div id="ready" class="text-center">
+            <p class="text-white">Get ready for the next battle in 5 secs...</p>
+        </div>
+        <div class="row mx-auto" id="opciones">
+            <div class="col-0 col-md-1 text-center"></div>
+
+            <div class="col-12 col-md-2 text-center">
+                <a class="zoom" id="piedra" onclick="selectRock()"><img src="assets/img/rock.png" alt="Piedra"></a>
+            </div>
+            <div class="col-12 col-md-2 text-center">
+                <a class="zoom" id="papel" onclick="selectPaper()"><img src="assets/img/papel.png" alt="Papel"></a>
+            </div>
+            <div class="col-12 col-md-2 text-center">
+                <a class="zoom" id="tijera" onclick="selectScissors()"><img src="assets/img/tijeras.png" alt="Tijeras"></a>
+            </div>
+            <div class="col-12 col-md-2 text-center">
+                <a class="zoom" id="lagarto" onclick="selectLagarto()"><img src="assets/img/lagarto.png" alt="Lagarto"></a>
+            </div>
+            <div class="col-12 col-md-2 text-center">
+                <a class="zoom" id="spock" onclick="selectSpock()"><img src="assets/img/spock.png" alt="Spock"></a>
+            </div>
+            <div class="col-0 col-md-1 text-center"></div>
+        </div>
+        <div id="fin">
+
+        </div>
+
+        <div id="consola">
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0 text-center">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Chat de la sala
+                              </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="row">
+                            <div class="bg-light mx-3 " id="messages">
+
+                            </div>
+                        </div>
+                        <form class="inline-group" onsubmit="return addMessage(this)">
+                            <div class="input-group">
+                                <div class="col-8 p-0">
+                                    <input class="form-control" id="text" placeholder="Mensaje" />
+                                </div>
+                                <div class="col-4 p-0">
+                                    <button class="btn btn-success btn-block" id="submit" type="submit">
+                                                <i class="fa fa-paper-plane mx-2"></i>
+                                        </button>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <form action="/" enctype="multipart/form-data" method="post">
+                            <div class="input-group">
+                                <div class="col-8 p-0">
+                            <input  class="form-control"type="file" name="upload" multiple></div><div class="col-4 p-0">
+                            <input class="btn btn-primary btn-block"type="submit" value="Upload"></div></div>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0  text-center">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Chat global
+                              </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="row">
+                            <div class="bg-light mx-3 " id="messagesglobal">
+
+                            </div>
+                        </div>
+                        <form class="inline-group" onsubmit="return addMessageGlobal(this)">
+                            <div class="input-group">
+                                <div class="col-10 p-0">
+                                    <input class="form-control" id="textglobal" placeholder="Mensaje" />
+                                </div>
+                                <div class="col-2 p-0">
+                                    <button class="btn btn-success btn-block" id="submit" type="submit">
+                                                <i class="fa fa-paper-plane mx-2"></i>
+                                        </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="percent"></div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
